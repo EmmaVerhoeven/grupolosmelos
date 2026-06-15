@@ -491,11 +491,54 @@
       grid-template-columns: 1.2fr 0.8fr;
       gap: 60px;
       align-items: start;
+      position: relative;
     }
 
     .about-body {
       font-size: 0.88rem;
       opacity: 0.85;
+    }
+
+    .follow-instagram-button {
+      position: absolute;
+      top: 24px;
+      right: -100px;
+      width: 200px;
+      height: 200px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      text-align: center;
+      background: var(--mid);
+      color: var(--gold);
+      font-family: var(--font-display);
+      font-size: 0.9rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      line-height: 1.2;
+      border-radius: 50%;
+      box-shadow: 0 24px 50px rgba(0, 0, 0, 0.2);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      z-index: 1;
+    }
+
+    .follow-instagram-button:hover {
+      transform: translateY(-4px);
+      background: var(--red);
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.25);
+    }
+
+    @media (max-width: 900px) {
+      .follow-instagram-button {
+        position: static;
+        right: auto;
+        top: auto;
+        margin: 32px auto 0;
+        width: 220px;
+        height: 220px;
+      }
     }
 
 
@@ -701,6 +744,15 @@
       opacity: 0.6;
     }
 
+    .event-weekday {
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      opacity: 0.65;
+      margin-bottom: 8px;
+      color: var(--cream);
+    }
+
     .event-name {
       font-family: var(--font-display);
       font-size: 1.7rem;
@@ -866,56 +918,6 @@
       font-size: 0.72rem;
       letter-spacing: 0.1em;
       opacity: 0.6;
-    }
-
-    .pricing-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-      margin: 48px auto 60px;
-      max-width: 900px;
-    }
-
-    .pricing-card {
-      background: rgba(255, 255, 255, 0.08);
-      padding: 24px 20px;
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      font-size: 0.8rem;
-      line-height: 1.6;
-      opacity: 0.8;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .pricing-title {
-      font-family: var(--font-display);
-      font-size: 1rem;
-      letter-spacing: 0.05em;
-      margin-bottom: 12px;
-      color: var(--cream);
-    }
-
-    .pricing-members {
-      font-size: 0.75rem;
-      opacity: 0.7;
-      margin-bottom: 12px;
-    }
-
-    .pricing-amount {
-      font-family: var(--font-display);
-      font-size: 1.4rem;
-      color: var(--cream);
-      font-weight: bold;
-      letter-spacing: 0.02em;
-      margin-top: auto;
-    }
-
-    .pricing-label {
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      letter-spacing: 0.1em;
-      text-transform: lowercase;
-      opacity: 0.7;
     }
 
     /* ===================================
@@ -1176,10 +1178,6 @@
         gap: 36px;
       }
 
-      .pricing-grid {
-        grid-template-columns: 1fr;
-      }
-
       .section-title {
         font-size: clamp(2.8rem, 10vw, 5rem);
       }
@@ -1305,7 +1303,10 @@
           </p>
           <!-- Emma: once you have the portraits, replace the initials circles with real photos. Add src="name.jpg" to .member-circle. Check Instagram links for each musician. -->
         </div>
-
+        <a class="follow-instagram-button" href="https://www.instagram.com/losmelos.salsa" target="_blank"
+          rel="noopener noreferrer">
+          follow us on<br>instagram
+        </a>
       </div>
     </div>
   </div>
@@ -1485,26 +1486,6 @@
         your stage. Send us a message and we'll get back to you as soon as possible.
       </p>
 
-      <div class="pricing-grid">
-        <div class="pricing-card">
-          <div class="pricing-title" data-i18n="pricingSextet">LOS MELOS SEXTET</div>
-          <div class="pricing-members">Singer, Piano, Bass, Congas, Trombone, Timbales</div>
-          <div class="pricing-amount"><span class="pricing-label">from</span> € 1.875</div>
-        </div>
-
-        <div class="pricing-card">
-          <div class="pricing-title" data-i18n="pricingSepteto">LOS MELOS SEPTETO</div>
-          <div class="pricing-members">Singer, Piano, Bass, Congas, Bongo, Trombone, Timbales</div>
-          <div class="pricing-amount"><span class="pricing-label">from</span> € 2.187,50</div>
-        </div>
-
-        <div class="pricing-card">
-          <div class="pricing-title" data-i18n="pricingFullBand">LOS MELOS VOLLEDIGE BAND</div>
-          <div class="pricing-members">Singer, Piano, Bass, Congas, Bongo, 2 Trombones, Timbales</div>
-          <div class="pricing-amount"><span class="pricing-label">from</span> € 2.500</div>
-        </div>
-      </div>
-
       <a class="btn btn-booking" href="mailto:rahesse@hotmail.com" data-i18n="bookingButton">
         ★ Send an inquiry
       </a>
@@ -1678,7 +1659,7 @@
       },
       pablo: {
         name: 'Pablo Martinez',
-        en: 'Trombonist from Andalucía, Spain and one of the leading trombone players in the Dutch Latin scene. Pablo has performed with artists such as Mayito Rivera, Pedrito Calvo, Jorge Pardo and the Metropole Orkest.',
+        en: 'Trombonist from Andalucía, Spain and one of the leading trombone players in the Dutch Latin scene. Pablo has performed with artists such as Mayito Rivera, Pedrito Calvo JR, Jorge Pardo and the Metropole Orkest.',
         nl: 'Trombonist uit Andalusië, Spanje en een van de toonaangevende trombonisten binnen de Nederlandse Latin scene. Pablo speelde met artiesten als Mayito Rivera, Pedrito Calvo, Jorge Pardo en het Metropole Orkest.'
       },
       maarten: {
@@ -1803,14 +1784,74 @@
       if (agendaEvents.length) renderAgenda();
     }
 
+    const WEEKDAYS = {
+      en: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+      nl: ['zondag', 'maandag', 'dinsdag', 'woensdag', 'donderdag', 'vrijdag', 'zaterdag']
+    };
+
     function parseDate(str) {
-      if (!str) return { day: '—', month: '' };
-      const parts = str.split(/[\s\-\/\.]+/);
-      const day = parts[0] || '—';
-      const mRaw = parts[1] || '';
-      const mNum = parseInt(mRaw, 10);
-      const month = isNaN(mNum) ? mRaw.slice(0, 3).toLowerCase() : (MONTHS[currentLang][mNum - 1] || mRaw);
-      return { day, month };
+      if (!str) return { day: '—', month: '', weekday: '' };
+      const trimmed = String(str).trim();
+      let date = null;
+
+      const slashMatch = trimmed.match(/^(\d{1,2})[\/\-.](\d{1,2})[\/\-.](\d{2,4})$/);
+      if (slashMatch) {
+        const day = parseInt(slashMatch[1], 10);
+        const month = parseInt(slashMatch[2], 10) - 1;
+        const year = parseInt(slashMatch[3], 10);
+        date = new Date(year, month, day);
+      } else {
+        const cleaned = trimmed.replace(/^[A-Za-z]+,?\s*/, '');
+        date = new Date(cleaned);
+      }
+
+      if (isNaN(date.getTime())) {
+        const altMatch = trimmed.match(/(\d{1,2})\s+([A-Za-zéÉäÄïÏóÓúÚ]+)\s+(\d{4})/);
+        if (altMatch) {
+          const day = parseInt(altMatch[1], 10);
+          const monthKey = altMatch[2].slice(0, 3).toLowerCase();
+          const monthMap = {
+            jan: 0, feb: 1, mar: 2, mrt: 2, apr: 3, may: 4, mei: 4, jun: 5, jul: 6, aug: 7, sep: 8, okt: 9, oct: 9, nov: 10, dec: 11, des: 11
+          };
+          const month = monthMap[monthKey];
+          const year = parseInt(altMatch[3], 10);
+          if (month !== undefined) date = new Date(year, month, day);
+        }
+      }
+
+      if (!date || isNaN(date.getTime())) {
+        return { day: '—', month: '', weekday: '' };
+      }
+
+      return {
+        day: date.getDate(),
+        month: MONTHS[currentLang][date.getMonth()] || MONTHS.en[date.getMonth()],
+        weekday: WEEKDAYS[currentLang][date.getDay()] || WEEKDAYS.en[date.getDay()]
+      };
+    }
+
+    function parseTime(str) {
+      if (!str && str !== 0) return '';
+      const value = String(str).trim();
+      const timeOnly = value.match(/^(\d{1,2}):(\d{2})(?::\d{2})?$/);
+      if (timeOnly) {
+        return `${timeOnly[1].padStart(2, '0')}:${timeOnly[2]}`;
+      }
+
+      const date = new Date(value);
+      if (!isNaN(date.getTime())) {
+        return date.toISOString().slice(11, 16);
+      }
+
+      const serial = Number(value);
+      if (!Number.isNaN(serial) && serial >= 0 && serial < 1) {
+        const minutes = Math.round(serial * 24 * 60);
+        const hours = Math.floor(minutes / 60);
+        const mins = minutes % 60;
+        return `${String(hours).padStart(2, '0')}:${String(mins).padStart(2, '0')}`;
+      }
+
+      return value;
     }
 
     function renderAgenda() {
@@ -1821,16 +1862,19 @@
       }
 
       container.innerHTML = agendaEvents.map(e => {
-        const { day, month } = parseDate(e.datum);
+        const { day, month, weekday } = parseDate(e.datum);
+        const time = parseTime(e.tijd);
+        const whereParts = [time, e.venue, e.stad, e.land ? '(' + e.land + ')' : ''].filter(Boolean);
         return `
           <div class="event-row">
             <div class="event-date-block">
+              <div class="event-weekday">${weekday}</div>
               <div class="event-day">${day}</div>
               <div class="event-month">${month}</div>
             </div>
             <div class="event-info">
               <div class="event-name">${e.titel || ''}</div>
-              <div class="event-where">${[e.venue, e.stad, e.land ? '(' + e.land + ')' : ''].filter(Boolean).join(' — ')}</div>
+              <div class="event-where">${whereParts.join(' — ')}</div>
               ${e.beschrijving ? `<p class="event-desc">${e.beschrijving}</p>` : ''}
             </div>
             ${e.link ? `<div class="event-btn"><a href="${e.link}" target="_blank">${t('eventMoreInfo')}</a></div>` : ''}
