@@ -680,6 +680,14 @@
 
     }
 
+    .music-callout {
+      display: inline-block;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--cream);
+      line-height: 1.4;
+    }
+
     .spotify-wrap {
       margin-top: 20px;
       border: 1px solid rgba(236, 221, 184, 0.15);
@@ -762,6 +770,14 @@
       letter-spacing: 0.2em;
       text-transform: uppercase;
       opacity: 0.6;
+    }
+
+    .event-year {
+      font-size: 0.58rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      opacity: 0.7;
+      margin-top: 4px;
     }
 
     .event-weekday {
@@ -1422,7 +1438,7 @@
           <div class="member-circle"><img src="maarten.png" alt="Maarten Combrink"></div>
           <div class="member-name">Maarten Combrink</div>
           <div class="member-instrument">Trombone</div>
-          <div class="member-origin">Netherlands</div>
+          <div class="member-origin">the Netherlands</div>
         </div>
 
       </div>
@@ -1449,7 +1465,7 @@
             received extremely positively outside the Netherlands.
           </p>
           <p class="music-body" data-i18n="musicPara3">
-            We are currently working on a new album - stay tuned!
+            <span class="music-callout">We are currently working on a new album - stay tuned!</span>
           </p>
 
 
@@ -1718,14 +1734,14 @@
         aboutTitle: 'About<br>The Band',
         aboutPara1: 'In Colombia, melo is slang for something that feels just right. For us, Los Melos is also a nod to melómanos: people with a deep love for music.',
         aboutPara2: 'Based in the Netherlands, Los Melos brings together musicians from Colombia, Venezuela, Spain, Italy, Germany and the Netherlands. Inspired by the sound of Colombian salsa dura, the band combines powerful percussion, rich trombone arrangements and the energy of salsa pa\'l bailador: salsa made for dancers.',
-        aboutPara3: 'At the heart of the sound is la base: bass, piano, congas, bongos and timbales locked into an irresistible groove. On top of that foundation, singer Nando Vanin from Cali carries on the tradition of the Colombian sonero with his spontaneous improvisations and unmistakable voice.',
+        aboutPara3: 'At the heart of the sound is la base: bass, piano, congas, bongos and timbales locked into an irresistible groove. On top of that foundation, singer Nando Vanin from Cali, Colombia carries on the tradition of the Colombian sonero with his spontaneous improvisations and unmistakable voice.',
         bandKicker: '◆ la formación ◆',
         bandTitle: 'The Musicians',
         musicKicker: '◆ la música ◆',
         musicTitle: 'Music',
         musicPara1: 'A Los Melómanos is our debut album and a tribute to everyone who keeps salsa alive: dancers, collectors, DJs and music lovers.',
         musicPara2: 'The album features new interpretations of classic repertoire and includes Vámonos de Rumba, which spent three months in the charts of Medellín salsa station Latinastereo. The record was mixed in Madrid and mastered in New York by Grammy winner Edwin Lozano.',
-        musicPara3: 'We are currently working on a new album - stay tuned!',
+        musicPara3: '<span class="music-callout">We are currently working on a new album - stay tuned!</span>',
         videosLabel: 'Videos',
         eventsKicker: '◆ próximas fechas ◆',
         eventsTitle: 'upcoming events',
@@ -1761,14 +1777,14 @@
         aboutTitle: 'Over<br>De Band',
         aboutPara1: 'In Colombia wordt het woord melo gebruikt voor iets dat precies goed voelt. Voor ons verwijst Los Melos ook naar melómanos: mensen met een grote liefde voor muziek.',
         aboutPara2: 'Los Melos is een in Nederland gevestigde salsaband met muzikanten uit Colombia, Venezuela, Spanje, Italië, Duitsland en Nederland. Geïnspireerd door de traditie van de Colombiaanse salsa dura combineert de band krachtige percussie, warme trombonearrangementen en de energie van salsa pa\'l bailador: salsa voor de danser.',
-        aboutPara3: 'Het kloppende hart van de band is la base: bas, piano, conga\'s, bongo\'s en timbales die samen een onweerstaanbare groove neerzetten. Daarboven brengt zanger Nando Vanin uit Cali de traditie van de Colombiaanse sonero tot leven met spontane improvisaties en zijn karakteristieke stem.',
+        aboutPara3: 'Het kloppende hart van de band is la base: bas, piano, conga\'s, bongo\'s en timbales die samen een onweerstaanbare groove neerzetten. Daarboven brengt zanger Nando Vanin uit Cali, Colombia de traditie van de Colombiaanse sonero tot leven met spontane improvisaties en zijn karakteristieke stem.',
         bandKicker: '◆ la formación ◆',
         bandTitle: 'De Muzikanten',
         musicKicker: '◆ la música ◆',
         musicTitle: 'Muziek',
         musicPara1: 'A Los Melómanos is ons debuutalbum en een ode aan iedereen die salsa levend houdt: dansers, verzamelaars, dj\'s en muziekliefhebbers.',
         musicPara2: 'Op het album staan nieuwe interpretaties van klassieke nummers, waaronder Vámonos de Rumba, dat drie maanden in de hitlijst van het Medellínse salsastation Latinastereo stond. De plaat werd gemixt in Madrid en gemasterd in New York door Grammy winnaar Edwin Lozano.',
-        musicPara3: 'We werken op dit moment aan een nieuw album - blijf op de hoogte!',
+        musicPara3: '<span class="music-callout">We werken op dit moment aan een nieuw album - blijf op de hoogte!</span>',
         videosLabel: 'Video\'s',
         eventsKicker: '◆ próximas fechas ◆',
         eventsTitle: 'aankomende events',
@@ -1825,7 +1841,7 @@
     };
 
     function parseDate(str) {
-      if (!str) return { day: '—', month: '', weekday: '' };
+      if (!str) return { day: '—', month: '', weekday: '', year: '' };
       const trimmed = String(str).trim();
       let date = null;
 
@@ -1855,13 +1871,14 @@
       }
 
       if (!date || isNaN(date.getTime())) {
-        return { day: '—', month: '', weekday: '' };
+        return { day: '—', month: '', weekday: '', year: '' };
       }
 
       return {
         day: date.getDate(),
         month: MONTHS[currentLang][date.getMonth()] || MONTHS.en[date.getMonth()],
-        weekday: WEEKDAYS[currentLang][date.getDay()] || WEEKDAYS.en[date.getDay()]
+        weekday: WEEKDAYS[currentLang][date.getDay()] || WEEKDAYS.en[date.getDay()],
+        year: date.getFullYear()
       };
     }
 
@@ -1897,7 +1914,7 @@
       }
 
       container.innerHTML = agendaEvents.map(e => {
-        const { day, month, weekday } = parseDate(e.datum);
+        const { day, month, weekday, year } = parseDate(e.datum);
         const time = parseTime(e.tijd);
         const whereParts = [time, e.venue, e.stad, e.land ? '(' + e.land + ')' : ''].filter(Boolean);
         return `
@@ -1906,6 +1923,7 @@
               <div class="event-weekday">${weekday}</div>
               <div class="event-day">${day}</div>
               <div class="event-month">${month}</div>
+              ${year ? `<div class="event-year">${year}</div>` : ''}
             </div>
             <div class="event-info">
               <div class="event-name">${e.titel || ''}</div>
