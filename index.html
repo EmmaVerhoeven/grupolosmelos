@@ -682,7 +682,7 @@
 
     .music-callout {
       display: inline-block;
-      font-size: 1rem;
+      font-size: 1.7rem;
       font-weight: 700;
       color: var(--cream);
       line-height: 1.4;
@@ -773,10 +773,10 @@
     }
 
     .event-year {
-      font-size: 0.58rem;
+      font-size: 0.82rem;
       letter-spacing: 0.16em;
       text-transform: uppercase;
-      opacity: 0.7;
+      opacity: 0.85;
       margin-top: 4px;
     }
 
@@ -853,11 +853,14 @@
       border: 1px solid rgba(236, 221, 184, 0.15);
       display: flex;
       flex-direction: column;
-      transition: border-color 0.2s;
+      transition: border-color 0.2s, transform 0.2s;
+      cursor: pointer;
+      position: relative;
     }
 
     .shop-card:hover {
       border-color: rgba(236, 221, 184, 0.35);
+      transform: translateY(-2px);
     }
 
     .shop-thumb {
@@ -870,29 +873,102 @@
       overflow: hidden;
     }
 
+    .shop-thumb img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
 
+    .thumb-poster {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgb(107, 217, 248);
+    }
 
-    /* SOLD OUT stamp */
-    .sold-stamp {
+    .thumb-poster img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      background: rgb(107, 217, 248);
+    }
+
+    .shop-card .sold-stamp {
       position: absolute;
       inset: 0;
       display: flex;
       align-items: center;
       justify-content: center;
       z-index: 2;
+      pointer-events: none;
     }
 
-    .sold-stamp span {
+    .shop-card .sold-stamp span {
       font-family: var(--font-display);
       text-transform: uppercase;
-      font-size: 1.6rem;
+      font-size: 1.2rem;
       color: var(--red);
-      border: 3px solid var(--red);
-      padding: 6px 14px;
+      border: 2px solid var(--red);
+      padding: 6px 12px;
       transform: rotate(-14deg);
       letter-spacing: 0.04em;
       opacity: 0.92;
-      background: rgba(12, 9, 4, 0.3);
+      background: rgba(12, 9, 4, 0.42);
+    }
+
+    .shop-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(5, 4, 2, 0.75);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 20px;
+    }
+
+    .shop-modal.active {
+      display: flex;
+    }
+
+    .shop-modal-content {
+      background: var(--cream);
+      color: var(--dark);
+      max-width: 420px;
+      width: 100%;
+      padding: 24px 24px 20px;
+      border: 1px solid rgba(12, 9, 4, 0.12);
+      box-shadow: 0 18px 48px rgba(0, 0, 0, 0.24);
+    }
+
+    .shop-modal-content h3 {
+      font-family: var(--font-display);
+      margin: 0 0 10px;
+      font-size: 1.2rem;
+      color: var(--red);
+    }
+
+    .shop-modal-content p {
+      margin: 0;
+      line-height: 1.6;
+      font-size: 0.95rem;
+    }
+
+    .shop-modal-close {
+      margin-top: 16px;
+      border: 0;
+      background: var(--red);
+      color: var(--cream);
+      padding: 8px 12px;
+      cursor: pointer;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
     }
 
     .shop-info {
@@ -1457,15 +1533,13 @@
       <div class="music-grid">
         <div>
           <p class="music-body" data-i18n="musicPara1">
-            Nique Quentin released <em>A Los Melómanos</em>: an album that brings passionate musical love to everyone. A
-            true melting pot of cultures, influences and stories from around the world — just like salsa itself.
+
           </p>
           <p class="music-body" data-i18n="musicPara2">
-            With a chart position in Colombia and compliments from salsa legend Rubén Blades, the album was also
-            received extremely positively outside the Netherlands.
+
           </p>
           <p class="music-body" data-i18n="musicPara3">
-            <span class="music-callout">We are currently working on a new album - stay tuned!</span>
+            <span class="music-callout"></span>
           </p>
 
 
@@ -1559,11 +1633,9 @@
 
       <div class="shop-grid">
 
-        <!-- VINYL -->
-        <div class="shop-card">
+        <div class="shop-card" data-shop-item="vinyl-black">
           <div class="shop-thumb">
             <div class="thumb-vinyl"><img src="vinyl1.png" alt=""></div>
-            <div class="sold-stamp"><span data-i18n="soldOut">Sold Out</span></div>
           </div>
           <div class="shop-info">
             <div class="shop-name">A Los Melómanos Black Vinyl</div>
@@ -1571,11 +1643,9 @@
           </div>
         </div>
 
-        <!-- CD -->
-        <div class="shop-card">
+        <div class="shop-card" data-shop-item="vinyl-blue">
           <div class="shop-thumb">
             <div class="thumb-vinyl"><img src="vinyl2.png" alt=""></div>
-            <div class="sold-stamp"><span data-i18n="soldOut">Sold Out</span></div>
           </div>
           <div class="shop-info">
             <div class="shop-name">A Los Melómanos Blue Vinyl</div>
@@ -1583,13 +1653,10 @@
           </div>
         </div>
 
-        <!-- POSTER I -->
-
-        <div class="shop-card">
+        <div class="shop-card" data-shop-item="poster-barrio">
           <div class="shop-thumb">
             <div class="thumb-poster"><img src="poster1.png" data-hover-src="poster-wall.png"
                 onmouseover="this.src='poster-wall.png'" onmouseout="this.src='poster1.png'" alt=""></div>
-            <div class="sold-stamp"><span data-i18n="soldOut">Sold Out</span></div>
           </div>
           <div class="shop-info">
             <div class="shop-name">A Los Melomanos Poster 'Barrio'</div>
@@ -1597,11 +1664,9 @@
           </div>
         </div>
 
-        <!-- POSTER II -->
-        <div class="shop-card">
+        <div class="shop-card" data-shop-item="poster-muralla">
           <div class="shop-thumb">
             <div class="thumb-poster"><img src="poster2.png" alt=""></div>
-            <div class="sold-stamp"><span data-i18n="soldOut">Sold Out</span></div>
           </div>
           <div class="shop-info">
             <div class="shop-name">A Los Melomanos Poster 'Muralla'</div>
@@ -1609,6 +1674,14 @@
           </div>
         </div>
 
+      </div>
+
+      <div class="shop-modal" id="shopModal" role="dialog" aria-modal="true" aria-label="Shop item notice">
+        <div class="shop-modal-content">
+          <h3 id="shopModalTitle"></h3>
+          <p id="shopModalText"></p>
+          <button class="shop-modal-close" type="button" id="shopModalClose">Close</button>
+        </div>
       </div>
 
 
@@ -1739,8 +1812,8 @@
         bandTitle: 'The Musicians',
         musicKicker: '◆ la música ◆',
         musicTitle: 'Music',
-        musicPara1: 'A Los Melómanos is our debut album and a tribute to everyone who keeps salsa alive: dancers, collectors, DJs and music lovers.',
-        musicPara2: 'The album features new interpretations of classic repertoire and includes Vámonos de Rumba, which spent three months in the charts of Medellín salsa station Latinastereo. The record was mixed in Madrid and mastered in New York by Grammy winner Edwin Lozano.',
+        musicPara1: 'A Los Melómanos is our debut album and a tribute to everyone who keeps salsa alive: dancers, collectors, DJs and music lovers all over the world.',
+        musicPara2: 'The album features new interpretations of classic repertoire and includes Vámonos de Rumba, which was listed three months in the charts of Medellín salsa station Latinastereo. The record was mixed in Madrid and mastered in New York by Grammy winner Edwin Lozano.',
         musicPara3: '<span class="music-callout">We are currently working on a new album - stay tuned!</span>',
         videosLabel: 'Videos',
         eventsKicker: '◆ próximas fechas ◆',
@@ -1752,6 +1825,8 @@
         shopKicker: '◆ la tienda ◆',
         shopNote: 'Coming soon: new merch with t-shirts, caps and more. Follow us on Instagram for updates!',
         soldOut: 'Sold Out',
+        soldOutPopupTitle: 'sold out',
+        soldOutPopupText: 'Currently sold out. Stay tuned for new merch with our upcoming album!',
         bookingKicker: '◆ reservas ◆',
         bookingTitle: 'Book<br>Los Melos',
         bookingSub: 'Looking for authentic Colombian salsa with an international line up of top musicians? Los Melos brings the sound of salsa dura to festivals, clubs, theatres and dance floors across Europe.',
@@ -1782,7 +1857,7 @@
         bandTitle: 'De Muzikanten',
         musicKicker: '◆ la música ◆',
         musicTitle: 'Muziek',
-        musicPara1: 'A Los Melómanos is ons debuutalbum en een ode aan iedereen die salsa levend houdt: dansers, verzamelaars, dj\'s en muziekliefhebbers.',
+        musicPara1: 'A Los Melómanos is ons debuutalbum en een ode aan iedereen die salsa levend houdt: dansers, verzamelaars, dj\'s en muziekliefhebbers over de hele wereld.',
         musicPara2: 'Op het album staan nieuwe interpretaties van klassieke nummers, waaronder Vámonos de Rumba, dat drie maanden in de hitlijst van het Medellínse salsastation Latinastereo stond. De plaat werd gemixt in Madrid en gemasterd in New York door Grammy winnaar Edwin Lozano.',
         musicPara3: '<span class="music-callout">We werken op dit moment aan een nieuw album - blijf op de hoogte!</span>',
         videosLabel: 'Video\'s',
@@ -1795,6 +1870,8 @@
         shopKicker: '◆ la tienda ◆',
         shopNote: 'Binnenkort: nieuwe merch met t-shirts, caps en meer. Volg ons op Instagram voor updates!',
         soldOut: 'sold out',
+        soldOutPopupTitle: 'sold out',
+        soldOutPopupText: 'Momenteel uitverkocht. Blijf op de hoogte voor nieuwe merch met ons aankomende album!',
         bookingKicker: '◆ reservas ◆',
         bookingTitle: 'Boek<br>Los Melos',
         bookingSub: 'Op zoek naar authentieke Colombiaanse salsa gebracht door een internationale bezetting topmuzikanten? Los Melos brengt de energie van salsa dura naar festivals, clubs, theaters en dansvloeren door heel Europa.',
@@ -1920,10 +1997,10 @@
         return `
           <div class="event-row">
             <div class="event-date-block">
+              ${year ? `<div class="event-year">${year}</div>` : ''}
               <div class="event-weekday">${weekday}</div>
               <div class="event-day">${day}</div>
               <div class="event-month">${month}</div>
-              ${year ? `<div class="event-year">${year}</div>` : ''}
             </div>
             <div class="event-info">
               <div class="event-name">${e.titel || ''}</div>
@@ -2001,6 +2078,10 @@
     const modal = document.getElementById('memberModal');
     const modalClose = document.getElementById('modalClose');
     const modalBody = document.getElementById('modalBody');
+    const shopModal = document.getElementById('shopModal');
+    const shopModalTitle = document.getElementById('shopModalTitle');
+    const shopModalText = document.getElementById('shopModalText');
+    const shopModalClose = document.getElementById('shopModalClose');
 
     document.querySelectorAll('.member-card').forEach(card => {
       card.addEventListener('click', () => {
@@ -2015,14 +2096,35 @@
       });
     });
 
+    document.querySelectorAll('.shop-card').forEach(card => {
+      card.addEventListener('click', () => {
+        shopModalTitle.textContent = t('soldOutPopupTitle');
+        shopModalText.textContent = t('soldOutPopupText');
+        shopModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+
     modalClose.addEventListener('click', () => {
       modal.classList.remove('active');
+      document.body.style.overflow = 'auto';
+    });
+
+    shopModalClose.addEventListener('click', () => {
+      shopModal.classList.remove('active');
       document.body.style.overflow = 'auto';
     });
 
     modal.addEventListener('click', (e) => {
       if (e.target === modal) {
         modal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+      }
+    });
+
+    shopModal.addEventListener('click', (e) => {
+      if (e.target === shopModal) {
+        shopModal.classList.remove('active');
         document.body.style.overflow = 'auto';
       }
     });
